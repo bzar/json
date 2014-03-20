@@ -307,14 +307,14 @@ std::string JSONValue::toString(unsigned long initialSize) const
   {
     if(buffer != nullptr)
     {
-      delete[] buffer;
+      free(buffer);
     }
 
     buffer = JSON_Encode(_value, size, &length);
   } while(length == size);
 
   std::string result(buffer);
-  delete[] buffer;
+  free(buffer);
   return result;
 }
 
