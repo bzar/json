@@ -857,3 +857,41 @@ struct JSON_Value* JSON_Array_Get_Value(struct JSON_Value* array, unsigned int i
 
   return *p;
 }
+
+
+int JSON_Object_Properties_Count(struct JSON_Value* object)
+{
+  struct JSON_Value** p;
+
+  if (object->type != JSON_VALUE_TYPE_OBJECT)
+  {
+    return -1;
+  }
+
+  int size = 0;
+  for (p = &object->compound_value; *p; p = &(*p)->next_value->next_value)
+  {
+    ++size;
+  }
+
+  return size;
+}
+
+
+int JSON_Object_Properties(struct JSON_Value* object, char** buffer, unsigned long bufferSize)
+{
+  struct JSON_Value** p;
+
+  if (object->type != JSON_VALUE_TYPE_OBJECT)
+  {
+    return -1;
+  }
+
+  int i;
+  for (i = 0, p = &object->compound_value; *p && i < bufferSize; p = &(*p)->next_value->next_value, ++i)
+  {
+    buffer[i] = strdup((*p)->string_value);
+  }
+
+  return i;
+}
