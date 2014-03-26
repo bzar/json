@@ -1,4 +1,6 @@
 #include "jsonpp.h"
+#include <fstream>
+#include <sstream>
 
 JSONValue::JSONValue(JSON_Value* value) : _value(value)
 {
@@ -260,6 +262,20 @@ JSONValue JSONValue::parse(std::string const& str)
 {
   JSON_Value* v = JSON_Decode(str.data());
   return JSONValue(v);
+}
+
+JSONValue JSONValue::parseFile(const std::string& path)
+{
+  std::ifstream t(path);
+  std::string str;
+  t.seekg(0, std::ios::end);
+  str.reserve(t.tellg());
+  t.seekg(0, std::ios::beg);
+
+  str.assign((std::istreambuf_iterator<char>(t)),
+              std::istreambuf_iterator<char>());
+
+  return parse(str);
 }
 
 std::string JSONValue::toString(unsigned long initialSize) const

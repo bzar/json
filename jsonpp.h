@@ -55,6 +55,7 @@ public:
   std::vector<std::string> properties() const;
 
   static JSONValue parse(std::string const& str);
+  static JSONValue parseFile(std::string const& path);
   std::string toString(unsigned long initialSize = 1024) const;
 
 private:
