@@ -895,3 +895,26 @@ int JSON_Object_Properties(struct JSON_Value* object, char** buffer, unsigned lo
 
   return i;
 }
+
+
+char JSON_Object_Has_Property(struct JSON_Value* object, const char* property)
+{
+  struct JSON_Value* result = NULL;
+  struct JSON_Value** p;
+
+  if (object->type != JSON_VALUE_TYPE_OBJECT)
+  {
+    return NULL;
+  }
+
+  for (p = &object->compound_value; *p; p = &(*p)->next_value->next_value)
+  {
+    if (strcmp((*p)->string_value, property) == 0)
+    {
+      result = (*p)->next_value;
+      break;
+    }
+  }
+
+  return result != NULL;
+}

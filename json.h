@@ -45,6 +45,7 @@ struct JSON_Value* JSON_Value_New_Null();
 struct JSON_Value* JSON_Value_Clone(struct JSON_Value* value);
 void JSON_Object_Set_Property(struct JSON_Value* object, const char* property, struct JSON_Value* value);
 struct JSON_Value* JSON_Object_Get_Property(struct JSON_Value* object, const char* property);
+char JSON_Object_Has_Property(struct JSON_Value* object, const char* property);
 int JSON_Object_Properties_Count(struct JSON_Value* object);
 int JSON_Object_Properties(struct JSON_Value* object, char** buffer, unsigned long bufferSize);
 void JSON_Array_Append(struct JSON_Value* array, struct JSON_Value* value);

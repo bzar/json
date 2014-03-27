@@ -51,6 +51,7 @@ public:
   JSONValue at(unsigned int index) const;
   JSONValue& append(JSONValue const& value);
   JSONValue get(std::string const& property) const;
+  bool has(std::string const& property) const;
   JSONValue& set(std::string const& property, JSONValue const& value);
   std::vector<std::string> properties() const;
 

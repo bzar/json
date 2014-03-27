@@ -222,6 +222,21 @@ JSONValue JSONValue::get(std::string const& property) const
   }
 
 }
+
+bool JSONValue::has(const std::string& property) const
+
+{
+  if(_value != nullptr && _value->type == JSON_VALUE_TYPE_OBJECT)
+  {
+    return JSON_Object_Has_Property(_value, property.data());
+  }
+  else
+  {
+    throw ValueException("Not an object value");
+  }
+
+}
+
 JSONValue& JSONValue::set(std::string const& property, JSONValue const& value)
 {
   if(_value != nullptr && _value->type == JSON_VALUE_TYPE_OBJECT)
